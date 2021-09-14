@@ -1,9 +1,13 @@
 #include "ip_filter.h"
-
+#include <range/v3/all.hpp>
 int main(/*int argc, char const *argv[]*/)
 {
     try
     {
+	std::vector<int> const vi{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+	using namespace ranges;
+	auto rng = vi | views::remove_if([](int i){return i % 2 == 1;})
+		      | views::transform([](int i){return std::to_string(i);});
 	pool ip_pool;
 
         for(std::string line; std::getline(std::cin, line);)

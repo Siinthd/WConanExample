@@ -10,7 +10,8 @@
 #include <fstream>
 #include <algorithm>
 
-#include <range/v3/all.hpp>
+
+
 
 
 using pool = std::vector<std::vector<int>>;

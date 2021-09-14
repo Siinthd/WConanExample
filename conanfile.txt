@@ -1,0 +1,9 @@
+[generators]
+cmake
+
+[requires]
+range-v3/0.10.0
+
+[options]
+
+[imports]
