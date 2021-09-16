@@ -1,4 +1,5 @@
 #include "ip_filter.h"
+
 // ("",  '.') -> [""]
 // ("11", '.') -> ["11"]
 // ("..", '.') -> ["", "", ""]
@@ -6,23 +7,6 @@
 // (".11", '.') -> ["", "11"]
 // ("11.22", '.') -> ["11", "22"]
 
-std::ostream& operator<<(std::ostream& os, const pool& data)
-{
-
-	for (auto ip = data.cbegin(); ip != data.cend(); ++ip)
-	{
-		for (auto ip_part = ip->cbegin(); ip_part != ip->cend(); ++ip_part)
-		{
-			if (ip_part != ip->cbegin())
-			{
-				os << ".";
-			}
-			os << *ip_part;
-		}
-		os << std::endl;
-	}
-	return os;
-}
 
 std::vector<std::string> split(const std::string &str, char d)
 {

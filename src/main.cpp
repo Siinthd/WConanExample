@@ -1,13 +1,34 @@
 #include "ip_filter.h"
 #include <range/v3/all.hpp>
-int main(/*int argc, char const *argv[]*/)
+#include <string_view>
+#include <functional>
+#include <algorithm>
+using namespace ranges;
+
+    auto first_is_one   = [](std::vector<int> vct) -> bool { return *vct.begin() == 1; };
+    auto have_46_70_   = [](std::vector<int> vct) -> bool { auto it = vct.begin(); return *it == 46 && (*it++) == 70; };
+    auto have_any_of_46  = [](std::vector<int> vct) -> bool { return ranges::any_of(vct,[](int i){return i == 46;});};
+
+    void PrintVect(const pool& data)
+{   
+    ranges::for_each(data,[](std::vector<int> lclvct){
+        int first[1];
+        first[0] = 0;
+        ranges::for_each(lclvct,[&first](int ival){
+            if(first[0] == 1) std::cout<<".";
+            *first = 1;
+            std::cout<<ival;
+        });
+        std::cout<<std::endl;
+    });
+
+}
+
+int main()
 {
+    //use split and << from .h
     try
     {
-	std::vector<int> const vi{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-	using namespace ranges;
-	auto rng = vi | views::remove_if([](int i){return i % 2 == 1;})
-		      | views::transform([](int i){return std::to_string(i);});
 	pool ip_pool;
 
         for(std::string line; std::getline(std::cin, line);)
@@ -26,10 +47,6 @@ int main(/*int argc, char const *argv[]*/)
         // TODO reverse lexicographically sort
 		std::sort(ip_pool.begin(), ip_pool.end(), std::greater<std::vector<int>>());
 
-
-		std::cout << ip_pool;
-		
-
         // 222.173.235.246
         // 222.130.177.64
         // 222.82.198.61
@@ -39,8 +56,18 @@ int main(/*int argc, char const *argv[]*/)
         // 1.1.234.8
 
         // TODO filter by first byte and output
-        // ip = filter(1)
-		std::cout << filter(ip_pool, 1);
+        auto vct_first_ones = ip_pool | ranges::view::filter(
+                    first_is_one);
+
+        PrintVect(vct_first_ones);
+
+        /*alternative method
+        ranges::for_each(ip_pool | ranges::view::filter([value=1](const auto& ip){ return ip[0] == value;}),
+                [](const auto& ip){std::cout << ip;});
+        
+        ranges::for_each(ip_pool | ranges::view::filter([value=46](const auto& ip){ return ip[0] == value;}) | ranges::view::filter([value=70](const auto& ip){ return ip[1] == value;}),
+                [](const auto& ip){std::cout << ip;});
+        */
         // 1.231.69.33
         // 1.87.203.225
         // 1.70.44.170
@@ -48,15 +75,21 @@ int main(/*int argc, char const *argv[]*/)
         // 1.1.234.8
 
         // TODO filter by first and second bytes and output
-        // ip = filter(46, 70)
-		std::cout << filter(ip_pool, 46,70);
+                auto vct_46_70 = ip_pool | ranges::view::filter(
+                    have_46_70_);
+
+
+        PrintVect(vct_46_70);
         // 46.70.225.39
         // 46.70.147.26
         // 46.70.113.73
         // 46.70.29.76
 
         // TODO filter by any byte and output
-		std::cout << filter_any(ip_pool,46);
+
+        auto vct_46 = ip_pool | ranges::view::filter(
+                    have_any_of_46);
+            PrintVect(vct_46);
 
         // 186.204.34.46
         // 186.46.222.194

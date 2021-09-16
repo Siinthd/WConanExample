@@ -1,0 +1,22 @@
+Start testing: Sep 15 14:47 MSK
+----------------------------------------------------------
+1/1 Testing: test_filter
+1/1 Test: test_filter
+Command: "/home/siinthddev/CppProjects/LabsOtys/WConanExample/bin/bin/test_filter"
+Directory: /home/siinthddev/CppProjects/LabsOtys/WConanExample/bin
+"test_filter" start time: Sep 15 14:47 MSK
+Output:
+----------------------------------------------------------
+Running 3 test cases...
+
+[1;32;49m*** No errors detected
+[0;39;49m
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"test_filter" end time: Sep 15 14:47 MSK
+"test_filter" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Sep 15 14:47 MSK

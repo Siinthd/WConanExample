@@ -16,8 +16,6 @@
 
 using pool = std::vector<std::vector<int>>;
 
-std::ostream& operator<<(std::ostream& os, const pool& data);
-
 std::vector<std::string> split(const std::string &str, char d);
 
 pool filter(const pool& ip_pool,int first);

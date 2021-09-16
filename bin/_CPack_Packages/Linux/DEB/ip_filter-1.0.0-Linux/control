@@ -1,0 +1,10 @@
+Architecture: amd64
+Depends: libc6 (>= 2.2.5), libgcc-s1 (>= 3.0), libstdc++6 (>= 5.2)
+Description: ip_filter built using CMake
+Maintainer: Siinthd@protonmail.com
+Package: ip_filter
+Priority: optional
+Section: devel
+Version: 1.0.0
+Installed-Size: 138
+
